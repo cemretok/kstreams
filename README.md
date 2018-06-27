@@ -120,18 +120,22 @@
   4. **Level: Medium- BranchTopology. Producer -  TweetProducer**
     In this Exercise you will have to Listens to tweet,
     filter only english tweets, branch by predicates to different 
-    topics by device and print it.
+    topics by device and print it 
     
-    **Hints:**
+   **Hints**
+
      
-    + [KStream](https://kafka.apache.org/10/javadoc/org/apache/kafka/streams/kstream/KStream.html)
+   + [KStream](https://kafka.apache.org/10/javadoc/org/apache/kafka/streams/kstream/KStream.html)
+        
+        
+        
         
   5. **Level: Easy - DevicesTopology. Producer - TweetProducer.** In this exercise you will have to count number of tweets created by each device type(Iphone, Android etc..).
         
-    **Hints:** 
+   **Hints:** 
 
-    + [KGroupedStream](https://kafka.apache.org/0110/javadoc/org/apache/kafka/streams/kstream/KGroupedStream.html)
-    + [KStream](https://kafka.apache.org/10/javadoc/org/apache/kafka/streams/kstream/KStream.html)
+   + [KGroupedStream](https://kafka.apache.org/0110/javadoc/org/apache/kafka/streams/kstream/KGroupedStream.html)
+   + [KStream](https://kafka.apache.org/10/javadoc/org/apache/kafka/streams/kstream/KStream.html)
 
         
         
