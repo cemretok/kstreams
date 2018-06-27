@@ -79,10 +79,9 @@
             --property print.value=true \
             --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer \
             --property value.deserializer=org.apache.kafka.common.serialization.LongDeserializer
+          
       
-      
-      
-    ________________________
+  ________________________
  
  ### Exercise
  See exercises and solutions at *../kstreams/src/main/java/com/fastfur/messaging/exercise*
