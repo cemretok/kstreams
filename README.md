@@ -47,6 +47,8 @@
        docker exec -i -t kafka-container-id /bin/bash
        $KAFKA_HOME/bin/kafka-topics.sh --list --zookeeper zk-IP
        
+       E.g. : $KAFKA_HOME/bin/kafka-topics.sh --list --zookeeper 172.18.0.2:2181
+       
   It should print list of topics like that : 
   
        outputtopic1
