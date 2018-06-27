@@ -79,7 +79,18 @@
             --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer \
             --property value.deserializer=org.apache.kafka.common.serialization.LongDeserializer
           
+    
+    
+   ### Troubleshooting 
+   
+   Sometimes stream is stuck (data is not streaming) to resolve it try to run:
+   
+      docker-compose stop
+      docker-composer rm
       
+   if the problem persists try to delete all images :
+   
+      docker rmi <images list>
   ________________________
  
  ### Exercise
