@@ -18,7 +18,7 @@ public class BaseProducer {
 
         producer.send(new ProducerRecord(topic, record.getKey(), record));
         try {
-            Thread.sleep(100);
+            Thread.sleep(50);
         } catch (InterruptedException e) {
             throw new RuntimeException(e.getMessage());
         }
@@ -32,11 +32,14 @@ public class BaseProducer {
 
 
     public Properties initProps(){
-        properties = new Properties();
+        properties = new Properties();       //172.18.0.3
         properties.put("bootstrap.servers", "localhost:9092");
         properties.put("acks", "1");
-        properties.put("retries", 10);
+        properties.put("retries", 0);
+        properties.put("batch.size", 512);
+        properties.put("linger.ms", 1);
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+
         return properties;
     }
 

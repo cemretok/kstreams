@@ -32,7 +32,7 @@ public class TweetProducer extends BaseProducer {
 
     public List<Status> searchTwitts(String queryString) throws Exception{
         Query query = new Query(queryString);
-        query.setCount(100);
+        query.setCount(500);
         QueryResult result = twitter.search(query);
         return result.getTweets();
     }
