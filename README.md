@@ -58,6 +58,10 @@
    
  Looks like we're ready to go...
  
+ ### Portainer container manager
+ docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+ 
+ 
  ### Kafka consumer
  We need to start Kafka consumers for the topics of our interest.
  
@@ -79,7 +83,18 @@
             --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer \
             --property value.deserializer=org.apache.kafka.common.serialization.LongDeserializer
           
+    
+    
+   ### Troubleshooting 
+   
+   Sometimes stream is stuck (data is not streaming) to resolve it try to run:
+   
+      docker-compose stop
+      docker-composer rm
       
+   if the problem persists try to delete all images :
+   
+      docker rmi <images list>
   ________________________
  
  ### Exercise
@@ -98,7 +113,7 @@
    + [KStream](https://kafka.apache.org/0110/javadoc/org/apache/kafka/streams/kstream/KStream.html)
    + [KStreamBuilder](https://kafka.apache.org/0102/javadoc/org/apache/kafka/streams/kstream/KStreamBuilder.html)
      
-  2. **level : Medium. Producer -  TweetProducer** 
+  2. **level : Medium - PopularTweets. Producer -  TweetProducer** 
    In this exercise you will have to implement a topology that will print the most popular
    tweet in each minute for each language. The time window should be for the last 10 minutes.
    Filter the tweets such that only tweets with 10 likes and above are passed
@@ -108,7 +123,7 @@
    + [TimeWindows](https://kafka.apache.org/0110/javadoc/org/apache/kafka/streams/kstream/TimeWindows.html)
    + [KGroupedStream](https://kafka.apache.org/0102/javadoc/org/apache/kafka/streams/kstream/KGroupedStream.html)
   
-  3. **Level: Medium. Producer - JoinTweetsExercise**
+  3. **Level: Medium - JoinTweets. Producer - JoinTweetsExercise**
    In this exercise you will have to calculate the time difference 
    between a response to a tweet and the original tweet
    
@@ -138,7 +153,14 @@
    + [KStream](https://kafka.apache.org/10/javadoc/org/apache/kafka/streams/kstream/KStream.html)
 
         
-        
+   6. **Level: Easy - TrumpTopology. Producer - TweetProducer.** In this exercise you will have to create new stream contain only tweets  that contains 'trump' in their user name . The new stream key will be the user name.
+            
+       **Hints:** 
+           + [KStream](https://kafka.apache.org/10/javadoc/org/apache/kafka/streams/kstream/KStream.html)
+    
+            
+            
+    
 
      
     
