@@ -9,22 +9,18 @@ import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.*;
-import org.omg.PortableInterceptor.LOCATION_FORWARD;
 
-import java.time.Duration;
 import java.util.Properties;
 
 
+/**
+ In this exercise you will have to implement a topology that will print the most popular
+ tweet in each minute for each language. The time window should be for the last 10 minutes.
+ Filter the tweets such that only tweets with 10 likes and above are passed
+ */
+public class PopularTweetsExercise {
 
-public class JoinTweetsExecise {
 
-
-    /**
-     * Get the most popular tweets in each language in the last 10 seconds. Take into account only tweets with more than 10 likes.
-     Possible implementation includes: filter, group by, and reduce with timewindow.
-     * @param args
-     * @throws Exception
-     */
     public static void main(String[] args) throws Exception {
 
 
@@ -37,28 +33,19 @@ public class JoinTweetsExecise {
 
         StreamsBuilder builder = new StreamsBuilder();
         KStream<String, Tweet> stream = builder.stream( TwitterTopics.TWITTERS_TOPIC, Consumed.with( Serdes.String(), new TweetSerde() ) );
-        KStream<Long, Tweet> deviceStream = builder.stream( TwitterTopics.GOT_RESPONDED_TOPIC, Consumed.with( Serdes.Long(), new TweetSerde() ) );
-       stream.filter( (k,v) -> v.getInReponseTo()!= 0 )
-               .selectKey( (k,v) -> v.getInReponseTo() )
-                .join( deviceStream, new ValueJoiner<Tweet, Tweet, Long>() {
-                            @Override
-                            public Long apply(Tweet tweet, Tweet vt) {
-                                return tweet.getInReponseTo() - vt.getInReponseTo();
-                            }
-                        }, JoinWindows.of( Duration.ofDays( 30 ).toMillis() ) );
-
-
+            /**
+            *foreach( (k, v) -> System.out.println( "start -> " + k.window().start() +  "  key -> " + k.key() ) );
+             */
 
         KafkaStreams streams = new KafkaStreams( builder.build(), config );
         streams.start();
 
 
-
-
-
-
-
     }
+
+
+
+
 
 
 }

@@ -9,24 +9,22 @@ import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.*;
+import org.omg.PortableInterceptor.LOCATION_FORWARD;
 
+import java.time.Duration;
 import java.util.Properties;
 
 
-/**
- In this exercise you will have to implement a topology that will print the most popular
- tweet in each minute for each language. The time window should be for the last 10 minutes.
- Filter the tweets such that only tweets with 10 likes and above are passed
- */
-public class PopularTweetsExecise {
+
+public class JoinTweetsExercise {
 
 
-
-
-
-
-
-
+    /**
+     In this exercise you will have to calculate the time difference
+     between a response to a tweet and the original tweet.
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
 
 
@@ -39,19 +37,24 @@ public class PopularTweetsExecise {
 
         StreamsBuilder builder = new StreamsBuilder();
         KStream<String, Tweet> stream = builder.stream( TwitterTopics.TWITTERS_TOPIC, Consumed.with( Serdes.String(), new TweetSerde() ) );
-            /**
-            *foreach( (k, v) -> System.out.println( "start -> " + k.window().start() +  "  key -> " + k.key() ) );
-             */
+        KStream<Long, Tweet> deviceStream = builder.stream( TwitterTopics.GOT_RESPONDED_TOPIC, Consumed.with( Serdes.Long(), new TweetSerde() ) );
+        /**
+         .foreach( (k, v) -> System.out.println( "key" + k.toString() + " value : " + v ) );
+         */
+
+
+
 
         KafkaStreams streams = new KafkaStreams( builder.build(), config );
         streams.start();
 
 
+
+
+
+
+
     }
-
-
-
-
 
 
 }
