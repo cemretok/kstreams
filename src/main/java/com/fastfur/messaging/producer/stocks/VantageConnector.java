@@ -15,33 +15,28 @@ public class VantageConnector {
         CertificateInstaller.installVantageCertificate();
     }
 
-    public String getData(String baseUri) {
+    public String getData(String baseUri) throws IOException {
         String jsonResponse = null;
-        try {
-            URL request = new URL(baseUri + API_KEY + API_VALUE);
-            URLConnection connection = request.openConnection();
-            connection.setConnectTimeout(3000);
-            connection.setReadTimeout(3000);
 
-            InputStreamReader inputStream = new InputStreamReader(connection.getInputStream(), "UTF-8");
-            BufferedReader bufferedReader = new BufferedReader(inputStream);
+        URL request;
+        URLConnection connection;
+
+        request = new URL(baseUri + API_KEY + API_VALUE);
+        connection = request.openConnection();
+        connection.setConnectTimeout(5000);
+        connection.setReadTimeout(3000);
+
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"))) {
             StringBuilder responseBuilder = new StringBuilder();
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 responseBuilder.append(line);
             }
-            bufferedReader.close();
             System.out.println("--------------------------------------");
             jsonResponse = responseBuilder.toString();
             System.out.println(jsonResponse);
             System.out.println("--------------------------------------");
-        } catch (IOException e) {
-            try {
-                throw new Exception("failure sending request", e);
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
         }
         return jsonResponse;
     }

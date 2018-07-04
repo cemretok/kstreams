@@ -1,5 +1,8 @@
 package com.fastfur.messaging.producer.stocks;
 
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLHandshakeException;
+import javax.net.ssl.TrustManagerFactory;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
@@ -9,12 +12,7 @@ import java.nio.file.Paths;
 import java.security.KeyStore;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
-
 import java.security.cert.X509Certificate;
-
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLHandshakeException;
-import javax.net.ssl.TrustManagerFactory;
 
 public class CertificateInstaller {
 
@@ -38,16 +36,6 @@ public class CertificateInstaller {
                 keyStore.setCertificateEntry("DSTRootCAX3", crt);
             }
 
-/*
-            System.out.println("Truststore now trusting: ");
-            PKIXParameters params = new PKIXParameters(keyStore);
-            params.getTrustAnchors().stream()
-                    .map(TrustAnchor::getTrustedCert)
-                    .map(X509Certificate::getSubjectDN)
-                    .forEach(System.out::println);
-            System.out.println();*/
-
-
             TrustManagerFactory tmf = TrustManagerFactory
                     .getInstance(TrustManagerFactory.getDefaultAlgorithm());
             tmf.init(keyStore);
@@ -62,7 +50,7 @@ public class CertificateInstaller {
 
     public static void main(String[] args) throws IOException {
         // signed by default trusted CAs.
-       // connectToVantage();
+        // connectToVantage();
         testUrl(new URL("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&apikey=QZZNHVR9BNNVZW01\n"));
         testUrl(new URL("https://www.thawte.com"));
 
@@ -79,37 +67,6 @@ public class CertificateInstaller {
 
     }
 
-    public static void connectToVantage (){
-        try {
-
-
-            URL request = new URL("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&apikey=QZZNHVR9BNNVZW01");
-            URLConnection connection = request.openConnection();
-            connection.setConnectTimeout(3000);
-            connection.setReadTimeout(3000);
-
-            InputStreamReader inputStream = new InputStreamReader(connection.getInputStream(), "UTF-8");
-            BufferedReader bufferedReader = new BufferedReader(inputStream);
-            StringBuilder responseBuilder = new StringBuilder();
-
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                responseBuilder.append(line);
-            }
-            bufferedReader.close();
-            System.out.println("--------------------------------------");
-            String response = responseBuilder.toString();
-            System.out.println(response);
-            System.out.println("--------------------------------------");
-        } catch (IOException e) {
-            try {
-                throw new Exception("failure sending request", e);
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
-        }
-    }
-
     static void testUrl(URL url) throws IOException {
         URLConnection connection = url.openConnection();
         try {
@@ -120,7 +77,6 @@ public class CertificateInstaller {
             System.out.println("Untrusted: " + url);
         }
     }
-
 
 
 }

@@ -3,7 +3,6 @@ package com.fastfur.messaging.producer.twitter;
 
 import com.fastfur.messaging.data.Tweet;
 import com.fastfur.messaging.producer.BaseProducer;
-import org.apache.kafka.clients.producer.KafkaProducer;
 import com.google.common.collect.Lists;
 import com.twitter.hbc.ClientBuilder;
 import com.twitter.hbc.core.Client;
@@ -12,7 +11,7 @@ import com.twitter.hbc.core.endpoint.StatusesFilterEndpoint;
 import com.twitter.hbc.core.processor.StringDelimitedProcessor;
 import com.twitter.hbc.httpclient.auth.Authentication;
 import com.twitter.hbc.httpclient.auth.OAuth1;
-
+import org.apache.kafka.clients.producer.KafkaProducer;
 
 import java.util.ArrayList;
 import java.util.Properties;
@@ -24,8 +23,9 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Created by yaarr on 6/19/18.
  */
 
-public class TwitterStreamProducer  extends BaseProducer {
+public class TwitterStreamProducer extends BaseProducer {
 
+    private static Integer MAX_MSG_TO_READ = 100000;
     private final String consumerKey;
     private final String consumerSecret;
     private final String token;
@@ -51,7 +51,7 @@ public class TwitterStreamProducer  extends BaseProducer {
 
     public void run() throws InterruptedException {
 
-        BlockingQueue<String> queue = new LinkedBlockingQueue<String>(10000);
+        BlockingQueue<String> queue = new LinkedBlockingQueue<String>(MAX_MSG_TO_READ);
         StatusesFilterEndpoint endpoint = new StatusesFilterEndpoint();
         // add some track terms
         endpoint.trackTerms(terms);
@@ -70,8 +70,9 @@ public class TwitterStreamProducer  extends BaseProducer {
         // Establish a connection
         client.connect();
 
+
         // Do whatever needs to be done with messages
-        for (int msgRead = 0; msgRead < 1000; msgRead++) {
+        for (int msgRead = 0; msgRead < MAX_MSG_TO_READ; msgRead++) {
             String tweetJson = queue.take();
             //System.out.println(tweetJson);
             produce( new Tweet(tweetJson), topic );
@@ -81,7 +82,7 @@ public class TwitterStreamProducer  extends BaseProducer {
         producer.close();
     }
 
-    public Properties initProps(){
+    public Properties initProps() {
         super.initProps();
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         properties.put("value.serializer", "com.fastfur.messaging.serde.TweetSerializer");
@@ -89,21 +90,21 @@ public class TwitterStreamProducer  extends BaseProducer {
 
     }
 
-  public static void main(String[] args) {
-    try {
-        TwitterStreamProducer twitterStreamProducer = new TwitterStreamProducer(
-                "syLHmMpyVbhkMEq4ua0xqTEEW",
-                "rWbfUOtAT3osmF1ACcJ4gs4AO3NuLPop9PNvdtbv4CZHW3Ccij",
-                "4537889248-WFl9VLppfc30BxKfjF9BY8y7kVXPuCRp4tSIHGD",
-                "N4lWvSFfO2hMdNK1NpzgT6q3GUEd6ai28zz938QxYs5kX",
-                "twitters",
-                Lists.newArrayList("WorldCup", "#WorldCup2018", "Russia")
-        );
-        twitterStreamProducer.run();
-    } catch (InterruptedException e) {
-      System.out.println(e);
+    public static void main(String[] args) {
+        try {
+            TwitterStreamProducer twitterStreamProducer = new TwitterStreamProducer(
+                    "syLHmMpyVbhkMEq4ua0xqTEEW",
+                    "rWbfUOtAT3osmF1ACcJ4gs4AO3NuLPop9PNvdtbv4CZHW3Ccij",
+                    "4537889248-WFl9VLppfc30BxKfjF9BY8y7kVXPuCRp4tSIHGD",
+                    "N4lWvSFfO2hMdNK1NpzgT6q3GUEd6ai28zz938QxYs5kX",
+                    "twitters",
+                    Lists.newArrayList("WorldCup", "#WorldCup2018", "Russia")
+            );
+            twitterStreamProducer.run();
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
     }
-  }
 
 }
 

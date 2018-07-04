@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.Properties;
 
 
-public class BranchTopology {
+public class BranchTopologySolution {
 
     public static final String INPUT_TOPIC_NAME = "twitters";
     public static final String TWEET_LANG       = "en";

@@ -5,7 +5,6 @@ import com.fastfur.messaging.data.Identity;
 import com.google.gson.annotations.SerializedName;
 
 
-
 public class DailyStockData implements Identity {
     private String day;
     @SerializedName("1. open")
@@ -41,13 +40,4 @@ public class DailyStockData implements Identity {
                 '}';
     }
 }
-
-/*
-"2018-06-15": {
-        "1. open": "23.1500",
-        "2. high": "23.4500",
-        "3. low": "23.0250",
-        "4. close": "23.4500",
-        "5. volume": "838560"
-        },*/
 
