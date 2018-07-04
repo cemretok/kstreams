@@ -16,7 +16,7 @@ import java.util.Properties;
  */
 public class VantageProducer extends BaseProducer {
 
-    private static final String VANTAGE_ORIGINAL_TOPIC = "vantage";
+    private static final String VANTAGE_ORIGINAL_TOPIC = "vantage_input";
     private VantageConnector vgConn;
 
     public VantageProducer() {
@@ -37,7 +37,7 @@ public class VantageProducer extends BaseProducer {
             DailyStockData dailyStockData = gson.fromJson(v.getValue(), DailyStockData.class);
             dailyStockData.setDay(v.getKey());
             return dailyStockData;
-        }). //forEach(v -> System.out.println(v)));
+        }).  //forEach(v -> System.out.println(v)));
                 forEach(v -> produce(v, VANTAGE_ORIGINAL_TOPIC)));
     }
 
