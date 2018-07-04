@@ -87,6 +87,8 @@
           
     
     
+    
+    
    ### Troubleshooting 
    
    Sometimes stream is stuck (data is not streaming) to resolve it try to run:
@@ -97,6 +99,14 @@
    if the problem persists try to delete all images :
    
       docker rmi <images list>
+      
+    ## Scaling Kafka Streams
+    In order to scale out Kafka Streams application we'll start a few instances of the same topology.
+    
+    Every Kafka Streams instance is going to read from its dedicated topic partition. 
+    
+    (We've created 3 partitions of vantage_input topic. See in docker-compose.yml)
+    
   ________________________
  
  ### Exercise
