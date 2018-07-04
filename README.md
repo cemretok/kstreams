@@ -90,7 +90,7 @@
    Sometimes stream is stuck (data is not streaming) to resolve it try to run:
    
       docker-compose stop
-      docker-composer rm
+      docker-compose rm
       
    if the problem persists try to delete all images :
    
