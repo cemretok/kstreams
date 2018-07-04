@@ -65,15 +65,17 @@
  ### Kafka consumer
  We need to start Kafka consumers for the topics of our interest.
  
- To do that run, inside of kafka container (this is the topic where the tweets come to): 
+ To do that run, inside of kafka container (this is the input topic where the tweets come to): 
       
       $KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server 172.18.0.3:9092 --topic twitters --from-beginning
       
- When we start Kafka Streams topology we supposed to see here a stream of incoming data in this topic.
+ When we start Kafka Streams topology we supposed to see here a stream of incoming data (tweets) to this topic.
  
  Open a second terminal, get into Kafka container and run Kafka console consumer
  
- This is the output topic where we write to the processed original stream 
+ This is the output topic where we write to the processed by the topology original stream 
+ 
+ In order to print properly the topology output, start the Kafka consumer this way:
  
       $KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server 172.18.0.3:9092 \
             --topic outputtopic2 \
@@ -85,19 +87,34 @@
           
     
     
+    
+    
    ### Troubleshooting 
    
    Sometimes stream is stuck (data is not streaming) to resolve it try to run:
    
       docker-compose stop
-      docker-composer rm
+      docker-compose rm
       
    if the problem persists try to delete all images :
    
       docker rmi <images list>
-  ________________________
+      
+   ## Scaling Kafka Streams
+    
+   In order to scale out Kafka Streams application we'll start a few instances of the same topology.
+    
+   Every Kafka Streams instance is going to read from its dedicated topic partition. 
+    
+   (We've created 3 partitions of vantage_input topic. See in docker-compose.yml)
  
- ### Exercise
+ 
+ 
+ 
+  ________________________
+
+
+ ## Exercise
  See exercises and solutions at *../kstreams/src/main/java/com/fastfur/messaging/exercise*
  In this section we have added relevant documentation and hints for each exercise
     
