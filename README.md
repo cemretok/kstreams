@@ -102,15 +102,19 @@
       
    ## Scaling Kafka Streams
     
-    In order to scale out Kafka Streams application we'll start a few instances of the same topology.
+   In order to scale out Kafka Streams application we'll start a few instances of the same topology.
     
-    Every Kafka Streams instance is going to read from its dedicated topic partition. 
+   Every Kafka Streams instance is going to read from its dedicated topic partition. 
     
-    (We've created 3 partitions of vantage_input topic. See in docker-compose.yml)
-    
-  ________________________
+   (We've created 3 partitions of vantage_input topic. See in docker-compose.yml)
  
- ### Exercise
+ 
+ 
+ 
+  ________________________
+
+
+ ## Exercise
  See exercises and solutions at *../kstreams/src/main/java/com/fastfur/messaging/exercise*
  In this section we have added relevant documentation and hints for each exercise
     
