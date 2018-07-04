@@ -65,15 +65,17 @@
  ### Kafka consumer
  We need to start Kafka consumers for the topics of our interest.
  
- To do that run, inside of kafka container (this is the topic where the tweets come to): 
+ To do that run, inside of kafka container (this is the input topic where the tweets come to): 
       
       $KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server 172.18.0.3:9092 --topic twitters --from-beginning
       
- When we start Kafka Streams topology we supposed to see here a stream of incoming data in this topic.
+ When we start Kafka Streams topology we supposed to see here a stream of incoming data (tweets) to this topic.
  
  Open a second terminal, get into Kafka container and run Kafka console consumer
  
- This is the output topic where we write to the processed original stream 
+ This is the output topic where we write to the processed by the topology original stream 
+ 
+ In order to print properly the topology output, start the Kafka consumer this way:
  
       $KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server 172.18.0.3:9092 \
             --topic outputtopic2 \
