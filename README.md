@@ -100,7 +100,7 @@
    
       docker rmi <images list>
       
-    ## Scaling Kafka Streams
+   ## Scaling Kafka Streams
     
     In order to scale out Kafka Streams application we'll start a few instances of the same topology.
     
