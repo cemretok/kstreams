@@ -101,6 +101,7 @@
       docker rmi <images list>
       
     ## Scaling Kafka Streams
+    
     In order to scale out Kafka Streams application we'll start a few instances of the same topology.
     
     Every Kafka Streams instance is going to read from its dedicated topic partition. 
