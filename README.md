@@ -98,8 +98,10 @@
       
    if the problem persists try to delete all images :
    
-      docker rmi <images list>
-      
+      docker stop $(docker ps -a -q)
+      docker rm $(docker ps -a -q)
+      docker rmi $(docker ps -a -q)
+       
    ## Scaling Kafka Streams
     
    In order to scale out Kafka Streams application we'll start a few instances of the same topology.
