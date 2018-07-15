@@ -151,7 +151,7 @@
     filter only english tweets, branch by predicates to different 
     topics by device and print it 
     
-   **Hints** 
+   **Hints:** 
    + [KStream](https://kafka.apache.org/10/javadoc/org/apache/kafka/streams/kstream/KStream.html)
         
   5. **level : Medium - PopularTweets. Producer -  TweetProducer** 
