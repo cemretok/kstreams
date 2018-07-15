@@ -124,7 +124,8 @@
    1. **Level: Easy - TrumpTopology. Producer - TweetProducer.** In this exercise you will have to create new stream contain only              tweets that contains 'trump' in their user name . The new stream key will be the user name.
             
    **Hints:** 
-    + [KStream](https://kafka.apache.org/10/javadoc/org/apache/kafka/streams/kstream/KStream.html)
+   
+   + [KStream](https://kafka.apache.org/10/javadoc/org/apache/kafka/streams/kstream/KStream.html)
     
   2. **Level : Easy - EncryptTweet. Producer - TweetWithResponseProducer**
    In this exercise you will have to encrypt tweets(text field only) from two topics :
