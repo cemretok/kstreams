@@ -102,6 +102,8 @@
       docker rm $(docker ps -a -q)
       docker rmi $(docker ps -a -q)
        
+   And then rerun docker-compose.
+   
    ## Scaling Kafka Streams
     
    In order to scale out Kafka Streams application we'll start a few instances of the same topology.
