@@ -20,7 +20,7 @@ public class TrumpTweetSolution {
         config.put( StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, TweetSerde.class );
         StreamsBuilder builder = new StreamsBuilder();
         KStream<String, Tweet> stream = builder.stream( TwitterTopics.TWITTERS_TOPIC, Consumed.with( Serdes.String(), new TweetSerde() ) );
-        stream.map( (k,v) -> new KeyValue<>(v.getName(), v))
+        stream.map( (k,v) -> new KeyValue<>(v.getUserName(), v))
                 .filter((k,v) -> k.toLowerCase().contains( "trump" ))
                 .peek( (k, v) -> System.out.println( "key -> " + k + "  value -> " + v.toString()) )
                 .to( TwitterTopics.TRUMP_TWEETS, Produced.with( Serdes.String(), new TweetSerde() ) );
