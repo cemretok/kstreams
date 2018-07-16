@@ -139,7 +139,8 @@
    + [KStreamBuilder](https://kafka.apache.org/0102/javadoc/org/apache/kafka/streams/kstream/KStreamBuilder.html)
    
    
-   3. **Level: Easy - DevicesTopology. Producer - TweetProducer.** In this exercise you will have to count number of tweets created by  each device type(Iphone, Android etc..).
+   3. **Level: Easy - DevicesTopology. Producer - TweetProducer.** 
+   In this exercise you will have to count number of tweets created by  each device type(Iphone, Android etc..).
         
    **Hints:** 
    + [KGroupedStream](https://kafka.apache.org/0110/javadoc/org/apache/kafka/streams/kstream/KGroupedStream.html)
@@ -153,7 +154,7 @@
    **Hints:** 
    + [KStream](https://kafka.apache.org/10/javadoc/org/apache/kafka/streams/kstream/KStream.html)
         
-  5. **level : Medium - PopularTweets. Producer -  TweetProducer** 
+  5. **level : Hard - PopularTweets. Producer -  TweetProducer** 
    In this exercise you will have to implement a topology that will print the most popular
    tweet in each minute for each language. The time window should be for the last 10 minutes.
    Filter the tweets such that only tweets with 10 likes and above are passed
@@ -162,7 +163,7 @@
    + [TimeWindows](https://kafka.apache.org/0110/javadoc/org/apache/kafka/streams/kstream/TimeWindows.html)
    + [KGroupedStream](https://kafka.apache.org/0102/javadoc/org/apache/kafka/streams/kstream/KGroupedStream.html)
   
-  6. **Level: Medium - JoinTweets. Producer - JoinTweetsExercise**
+  6. **Level: Hard - JoinTweets. Producer - TweetWithResponseProducer**
    In this exercise you will have to calculate the time difference 
    between a response to a tweet and the original tweet. To achieve this we should join two streams. 
    When you join two sreams, both streams must have the same key. 
