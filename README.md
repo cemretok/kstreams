@@ -58,9 +58,6 @@
    
  Looks like we're ready to go...
  
- ### Portainer container manager
- docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
- 
  
  ### Kafka consumer
  We need to start Kafka consumers for the topics of our interest.
@@ -167,8 +164,13 @@
   
   6. **Level: Medium - JoinTweets. Producer - JoinTweetsExercise**
    In this exercise you will have to calculate the time difference 
-   between a response to a tweet and the original tweet
-   
+   between a response to a tweet and the original tweet. To achieve this we should join two streams. 
+   When you join two sreams, both streams must have the same key. 
+   Regarding this specific example the key we use is `id` field in `com.fastfur.messaging.data.Tweet` class. 
+   When the people response to the specific tweet - the tweet field `inReponseTo` contains the id of the original tweet (if inReponseTo = -1 then this is the original tweet rather than response to the tweet).
+   So the idea is to take all the tweets with inReponseTo != -1 and restream it to the dedicated topic of `responses` with the key = inReponseTo.
+   Then join two streams : one from the original topic (the original tweets only!) and other from the topic of `responses`.
+    
    **Hints:**
    + [joins](https://docs.confluent.io/current/streams/concepts.html#joins)
    + [KStream](https://kafka.apache.org/0110/javadoc/org/apache/kafka/streams/kstream/KStream.html)
