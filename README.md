@@ -58,9 +58,6 @@
    
  Looks like we're ready to go...
  
- ### Portainer container manager
- docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
- 
  
  ### Kafka consumer
  We need to start Kafka consumers for the topics of our interest.
@@ -142,8 +139,9 @@
    + [KStreamBuilder](https://kafka.apache.org/0102/javadoc/org/apache/kafka/streams/kstream/KStreamBuilder.html)
    
    
-   3. **Level: Easy - DevicesTopology. Producer - TweetProducer.** In this exercise you will have to count number of tweets created by  each device type(Iphone, Android etc..).
-
+   3. **Level: Easy - DevicesTopology. Producer - TweetProducer.** 
+   In this exercise you will have to count number of tweets created by  each device type(Iphone, Android etc..).
+        
    **Hints:** 
    + [KGroupedStream](https://kafka.apache.org/0110/javadoc/org/apache/kafka/streams/kstream/KGroupedStream.html)
    + [KStream](https://kafka.apache.org/10/javadoc/org/apache/kafka/streams/kstream/KStream.html)
@@ -156,7 +154,7 @@
    **Hints:** 
    + [KStream](https://kafka.apache.org/10/javadoc/org/apache/kafka/streams/kstream/KStream.html)
         
-  5. **level : Medium - PopularTweets. Producer -  TweetProducer** 
+  5. **level : Hard - PopularTweets. Producer -  TweetProducer** 
    In this exercise you will have to implement a topology that will print the most popular
    tweet in each minute for each language. The time window should be for the last 10 minutes.
    Filter the tweets such that only tweets with 10 likes and above are passed
@@ -165,10 +163,15 @@
    + [TimeWindows](https://kafka.apache.org/0110/javadoc/org/apache/kafka/streams/kstream/TimeWindows.html)
    + [KGroupedStream](https://kafka.apache.org/0102/javadoc/org/apache/kafka/streams/kstream/KGroupedStream.html)
   
-  6. **Level: Medium - JoinTweets. Producer - JoinTweetsExercise**
+  6. **Level: Hard - JoinTweets. Producer - TweetWithResponseProducer**
    In this exercise you will have to calculate the time difference 
-   between a response to a tweet and the original tweet
-   
+   between a response to a tweet and the original tweet. To achieve this we should join two streams. 
+   When you join two sreams, both streams must have the same key. 
+   Regarding this specific example the key we use is `id` field in `com.fastfur.messaging.data.Tweet` class. 
+   When the people response to the specific tweet - the tweet field `inReponseTo` contains the id of the original tweet (if inReponseTo = -1 then this is the original tweet rather than response to the tweet).
+   So the idea is to take all the tweets with inReponseTo != -1 and restream it to the dedicated topic of `responses` with the key = inReponseTo.
+   Then join two streams : one from the original topic (the original tweets only!) and other from the topic of `responses`.
+    
    **Hints:**
    + [joins](https://docs.confluent.io/current/streams/concepts.html#joins)
    + [KStream](https://kafka.apache.org/0110/javadoc/org/apache/kafka/streams/kstream/KStream.html)

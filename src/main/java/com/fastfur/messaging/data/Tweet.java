@@ -26,16 +26,17 @@ public class Tweet implements Identity {
     private Date createdAt;
     private String language;
     private String source;
+    private String userName;
 
-    public String getName() {
-        return name;
+
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    private String name;
 
     public boolean isDecoded() {
         return decoded;
@@ -103,7 +104,7 @@ public class Tweet implements Identity {
         this.source    = status.getSource();
         this.inResponseTo = status.getInReplyToStatusId();
         this.decoded = false;
-        this.name = status.getUser().getName();
+        this.userName = status.getUser().getName();
     }
 
     public int getFavoriteCount() {
@@ -166,7 +167,7 @@ public class Tweet implements Identity {
                 ", language='" + language + '\'' +
                 ", source='" + source + '\'' +
                 ", decode='" + decoded + '\'' +
-                ", name='" + name + '\'' +
+                ", user name='" + userName + '\'' +
 
 
                 '}';
