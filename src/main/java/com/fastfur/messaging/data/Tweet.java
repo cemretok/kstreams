@@ -48,14 +48,14 @@ public class Tweet implements Identity {
     private boolean decoded;
 
     public long getInReponseTo() {
-        return inReponseTo;
+        return inResponseTo;
     }
 
     public void setInReponseTo(long inReponseTo) {
-        this.inReponseTo = inReponseTo;
+        this.inResponseTo = inReponseTo;
     }
 
-    private long inReponseTo;
+    private long inResponseTo;
 
     private String rawTweetJson;
     private long tweet_id;
@@ -101,7 +101,7 @@ public class Tweet implements Identity {
         this.createdAt = status.getCreatedAt();
         this.language  = status.getLang();
         this.source    = status.getSource();
-        this.inReponseTo = status.getInReplyToStatusId();
+        this.inResponseTo = status.getInReplyToStatusId();
         this.decoded = false;
         this.name = status.getUser().getName();
     }

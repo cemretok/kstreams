@@ -8,9 +8,9 @@ import twitter4j.Status;
 import java.util.List;
 
 
-public class TweetWithReponseProducer extends TweetProducer {
+public class TweetWithResponseProducer extends TweetProducer {
 
-    public TweetWithReponseProducer() {
+    public TweetWithResponseProducer() {
         super.init();
     }
 
@@ -37,7 +37,7 @@ public class TweetWithReponseProducer extends TweetProducer {
     }
 
     public static void main(String[] args) throws Exception {
-        TweetWithReponseProducer tp = new TweetWithReponseProducer();
+        TweetWithResponseProducer tp = new TweetWithResponseProducer();
         tp.produceTweets( Constant.TOP_TWEETS );
 
     }

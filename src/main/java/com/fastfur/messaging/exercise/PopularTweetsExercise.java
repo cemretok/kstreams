@@ -33,9 +33,13 @@ public class PopularTweetsExercise {
 
         StreamsBuilder builder = new StreamsBuilder();
         KStream<String, Tweet> stream = builder.stream( TwitterTopics.TWITTERS_TOPIC, Consumed.with( Serdes.String(), new TweetSerde() ) );
-            /**
-            *foreach( (k, v) -> System.out.println( "start -> " + k.window().start() +  "  key -> " + k.key() ) );
-             */
+        //your code is here....
+
+        //uncomment to print result
+
+        /**
+         * *foreach( (k, v) -> System.out.println( "start -> " + k.window().start() +  "  key -> " + k.key() ) );
+         */
 
         KafkaStreams streams = new KafkaStreams( builder.build(), config );
         streams.start();

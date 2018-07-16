@@ -16,7 +16,7 @@ import java.util.Properties;
 
 /**
  * In this exercise you will have to implement topology that will
- * count the how much times each device type used to creat the tweets
+ * count the how much times each device type used to send the tweets
  */
 public class DevicesTopologyExercise {
     public static void main(String[] args) throws Exception {
@@ -29,8 +29,9 @@ public class DevicesTopologyExercise {
         StreamsBuilder builder = new StreamsBuilder();
         KStream<String, Tweet> stream = builder.stream( TwitterTopics.TWITTERS_TOPIC, Consumed.with( Serdes.String(), new TweetSerde() ) );
         KStream<String, Tweet> deviceStream = builder.stream( TwitterTopics.DEVICES_TOPIC, Consumed.with( Serdes.String(), new TweetSerde() ) );
+        //your code here....
 
-
+        //uncomment to print final result
         /**
          .foreach( (k, v) -> System.out.println( "Device-> " + k + "  number -> " + v ) );
          */

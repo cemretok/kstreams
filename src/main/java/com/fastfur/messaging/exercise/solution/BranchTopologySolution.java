@@ -1,4 +1,4 @@
-package com.fastfur.messaging.streaming;
+package com.fastfur.messaging.exercise.solution;
 
 import com.fastfur.messaging.data.Tweet;
 import com.fastfur.messaging.producer.Queries;
@@ -21,9 +21,9 @@ import java.util.Properties;
 public class BranchTopologySolution {
 
     public static final String INPUT_TOPIC_NAME = "twitters";
-    public static final String TWEET_LANG       = "en";
-    public static final String OUTPUTTOPIC1     = "outputtopic1";
-    public static final String OUTPUTTOPIC2     = "outputtopic2";
+    public static final String TWEET_LANG = "en";
+    public static final String OUTPUTTOPIC1 = "outputtopic1";
+    public static final String OUTPUTTOPIC2 = "outputtopic2";
 
 
     public static void main(String[] args) throws Exception {
@@ -65,7 +65,6 @@ public class BranchTopologySolution {
                 toStream().
                 map((word, count) -> org.apache.kafka.streams.KeyValue.pair("key:" + word, count)).
                 to(OUTPUTTOPIC2, Produced.with(Serdes.String(), Serdes.Long()));
-//
 
         //using peek not to stop stream
 //        kStreams[0].peek((k, v) ->
@@ -75,7 +74,7 @@ public class BranchTopologySolution {
 //        kStreams[2].foreach((k, v) ->
 //                System.out.println(v.getSource() + " from Other sources stream"));
 
-        kStreams[0].to(OUTPUTTOPIC1, Produced.with(Serdes.String(), new TweetSerde()));
+        kStreams[1].to(OUTPUTTOPIC1, Produced.with(Serdes.String(), new TweetSerde()));
 
         KafkaStreams streams = new KafkaStreams(builder.build(), config);
 

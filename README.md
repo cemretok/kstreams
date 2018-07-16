@@ -143,7 +143,7 @@
    
    
    3. **Level: Easy - DevicesTopology. Producer - TweetProducer.** In this exercise you will have to count number of tweets created by  each device type(Iphone, Android etc..).
-        
+
    **Hints:** 
    + [KGroupedStream](https://kafka.apache.org/0110/javadoc/org/apache/kafka/streams/kstream/KGroupedStream.html)
    + [KStream](https://kafka.apache.org/10/javadoc/org/apache/kafka/streams/kstream/KStream.html)

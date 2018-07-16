@@ -29,7 +29,8 @@ public class JoinTweetsSolution {
         KStream<String, Tweet> responseStream = builder.stream( TwitterTopics.GOT_RESPONDED_TOPIC, Consumed.with( Serdes.String(), new TweetSerde() ) );
         stream.filter( (k, v) -> v.getInReponseTo() != -1 )
                 .selectKey( (k, v) -> String.valueOf( v.getInReponseTo() ) )
-                .join( responseStream, (left, right) -> TimeUnit.MILLISECONDS.toSeconds( left.getCreatedAt().getTime() - right.getCreatedAt().getTime() ), JoinWindows.of( 300000 ).before( 600000 ).until( 3600000 ) )
+                .join( responseStream, (left, right) -> TimeUnit.MILLISECONDS.toSeconds( left.getCreatedAt().getTime() - right.getCreatedAt().getTime() ),
+                        JoinWindows.of( 300000 ).before( 600000 ).until( 3600000 ) )
                 .foreach( (k, v) -> System.out.println( "key" + k.toString() + " value : " + v ) );
 
 
