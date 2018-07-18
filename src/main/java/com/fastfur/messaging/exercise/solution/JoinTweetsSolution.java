@@ -31,7 +31,7 @@ public class JoinTweetsSolution {
                 .selectKey( (k, v) -> String.valueOf( v.getInReponseTo() ) )
                 .join( responseStream, (left, right) -> TimeUnit.MILLISECONDS.toSeconds( left.getCreatedAt().getTime() - right.getCreatedAt().getTime() ),
                         JoinWindows.of( 300000 ).before( 600000 ).until( 3600000 ) )
-                .foreach( (k, v) -> System.out.println( "key" + k.toString() + " value : " + v ) );
+                .foreach( (k, v) -> System.out.println( "key : " + k.toString() + " value : " + v ) );
 
 
         KafkaStreams streams = new KafkaStreams( builder.build(), config );

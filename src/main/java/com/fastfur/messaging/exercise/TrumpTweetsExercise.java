@@ -44,7 +44,7 @@ public class TrumpTweetsExercise {
          .to( TwitterTopics.TRUMP_TWEETS, Produced.with( Serdes.String(), new TweetSerde() ) );
          */
 
-        stream.filter( (k,v) ->  v.getName().toLowerCase().contains("trump")).selectKey((k,v) -> v.getName()).print();
+        stream.filter( (k,v) ->  v.getUserName().toLowerCase().contains("trump")).selectKey((k,v) -> v.getUserName()).print();
 
 
         KafkaStreams streams = new KafkaStreams( builder.build(), config );
