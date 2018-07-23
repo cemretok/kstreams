@@ -172,14 +172,14 @@
   6. **level : Hard - PopularTweets. Producer -  TweetProducer** 
    In this exercise you will have to implement a topology that will print the most popular
    tweet in **each minute** for each language. The time window should be for the last 10 minutes.
-   Filter the tweets such that only tweets with 10 likes and above are passed
+   Filter the tweets such that only tweets with 10 likes and above are passed.
    
    **Hints:**
    + [TimeWindows](https://kafka.apache.org/0110/javadoc/org/apache/kafka/streams/kstream/TimeWindows.html)
    + [KGroupedStream](https://kafka.apache.org/0102/javadoc/org/apache/kafka/streams/kstream/KGroupedStream.html)
    
-   Pay attention to the methods : `windowedBy` of KGroupedStream class and `reduce` method of TimeWindowedKStream class
-   The likes is accumulated in the `favoriteCount` field bof Tweet class
+   Pay attention to the methods : `windowedBy` of KGroupedStream class and `reduce` method of TimeWindowedKStream class.
+   The likes is accumulated in the `favoriteCount` field of Tweet class.
   
   7. **Level: Hard - JoinTweets. Producer - TweetWithResponseProducer**
    In this exercise you will have to calculate the time difference 
