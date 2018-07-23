@@ -178,7 +178,8 @@
    + [TimeWindows](https://kafka.apache.org/0110/javadoc/org/apache/kafka/streams/kstream/TimeWindows.html)
    + [KGroupedStream](https://kafka.apache.org/0102/javadoc/org/apache/kafka/streams/kstream/KGroupedStream.html)
    
-   Pay attention to the methods : `windowedBy` of KGroupedStream class and `reduce` method of TimeWindowedKStream class 
+   Pay attention to the methods : `windowedBy` of KGroupedStream class and `reduce` method of TimeWindowedKStream class
+   The likes is accumulated in the `favoriteCount` field bof Tweet class
   
   7. **Level: Hard - JoinTweets. Producer - TweetWithResponseProducer**
    In this exercise you will have to calculate the time difference 
