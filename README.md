@@ -160,7 +160,7 @@
    + [KStream](https://kafka.apache.org/10/javadoc/org/apache/kafka/streams/kstream/KStream.html)
    
    
-   5. **level : Hard - AggregateLikes. Producer -  TweetProducer** 
+   5. **level : Medium - AggregateLikes. Producer -  TweetProducer** 
       In this exercise you will have to implement a topology that will print the summarise  numbef of likes   for each 
       language in each five seconds.  
       **Hints:**
