@@ -33,6 +33,7 @@ public class PopularTweetsSolution {
                         .groupBy( (k, v) -> v.getLanguage() )
                         .windowedBy( TimeWindows.of( 60000L ).until( 60000L * 10 ) )
                         .reduce( (v1, v2) -> v1.getFavoriteCount() > v2.getFavoriteCount() ? v1 : v2 );
+
         longSums.foreach( (k, v) -> System.out.println( "start -> " + k.window().start() + "  key -> " + k.key() + " value ->" + v.toString() )) ;
 
         KafkaStreams streams = new KafkaStreams( builder.build(), config );
