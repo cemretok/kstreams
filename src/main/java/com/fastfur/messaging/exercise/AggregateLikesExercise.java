@@ -1,4 +1,4 @@
-package com.fastfur.messaging.exercise.solution;
+package com.fastfur.messaging.exercise;
 
 import com.fastfur.messaging.data.Tweet;
 import com.fastfur.messaging.producer.twitter.TwitterTopics;
@@ -8,15 +8,19 @@ import org.apache.kafka.streams.Consumed;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
-import org.apache.kafka.streams.kstream.JoinWindows;
 import org.apache.kafka.streams.kstream.KStream;
 
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
+/**
+ In this exercise you will have to implement a topology that will print number of likes for each language
+  in each 5 seconds.
+ */
 
-public class JoinTweetsSolution {
+public class AggregateLikesExercise {
     public static void main(String[] args) throws Exception {
+
+
         Properties config = new Properties();
         config.put( StreamsConfig.APPLICATION_ID_CONFIG, "my-first-tweet-ks1" );
         config.put( StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092" );
@@ -26,16 +30,17 @@ public class JoinTweetsSolution {
 
         StreamsBuilder builder = new StreamsBuilder();
         KStream<String, Tweet> stream = builder.stream( TwitterTopics.TWITTERS_TOPIC, Consumed.with( Serdes.String(), new TweetSerde() ) );
-        KStream<String, Tweet> responseStream = builder.stream( TwitterTopics.GOT_RESPONDED_TOPIC, Consumed.with( Serdes.String(), new TweetSerde() ) );
+        //your code is here.....
 
-        stream.filter( (k, v) -> v.getInReponseTo() != -1 )
-                .selectKey( (k, v) -> String.valueOf( v.getInReponseTo() ) )
-                .join( responseStream, (left, right) -> TimeUnit.MILLISECONDS.toSeconds( left.getCreatedAt().getTime() - right.getCreatedAt().getTime() ),
-                        JoinWindows.of( 300000 ) )
-                .foreach( (k, v) -> System.out.println( "key : " + k.toString() + " value : " + v ) );
+        //uncomment to print result
 
+        /**
+         * *foreach( (k, v) -> System.out.println( "start -> " + k.window().start() +  "  key -> " + k.key() ) );
+         */
 
         KafkaStreams streams = new KafkaStreams( builder.build(), config );
         streams.start();
+
+
     }
 }

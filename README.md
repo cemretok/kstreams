@@ -101,6 +101,12 @@
        
    And then rerun docker-compose.
    
+   For Windows users if you have an issue starting docker-compose try to comment volume line:
+   volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      
+   and then rerun
+   
    ## Scaling Kafka Streams
     
    In order to scale out Kafka Streams application we'll start a few instances of the same topology.
@@ -110,8 +116,7 @@
    (We've created 3 partitions of vantage_input topic. See in docker-compose.yml)
  
  
- 
- 
+
   ________________________
 
 
@@ -128,7 +133,7 @@
     
   2. **Level : Easy - EncryptTweet. Producer - TweetWithResponseProducer**
    In this exercise you will have to encrypt tweets(text field only) from two topics :
-   encode_tweets & got_responded, and then stream it. After the transformation,
+   tweets & got_responded, and then stream it. After the transformation,
    push the result to the encode_tweets topic.
    For your convenience you can use  the CryptoUtil Class.
    
