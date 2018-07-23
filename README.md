@@ -192,6 +192,8 @@
    **Hints:**
    + [joins](https://docs.confluent.io/current/streams/concepts.html#joins)
    + [KStream](https://kafka.apache.org/0110/javadoc/org/apache/kafka/streams/kstream/KStream.html)
+   
+   You can use `branch` method from the previous examples to create two streams for the join. 
     
   
         
