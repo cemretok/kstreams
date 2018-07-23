@@ -171,7 +171,7 @@
         
   6. **level : Hard - PopularTweets. Producer -  TweetProducer** 
    In this exercise you will have to implement a topology that will print the most popular
-   tweet in each minute for each language. The time window should be for the last 10 minutes.
+   tweet in **each minute** for each language. The time window should be for the last 10 minutes.
    Filter the tweets such that only tweets with 10 likes and above are passed
    
    **Hints:**
