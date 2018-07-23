@@ -101,6 +101,12 @@
        
    And then rerun docker-compose.
    
+   For Windows users if you have an issue starting docker-compose try to comment volume line:
+   volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      
+   and then rerun
+   
    ## Scaling Kafka Streams
     
    In order to scale out Kafka Streams application we'll start a few instances of the same topology.
@@ -110,8 +116,7 @@
    (We've created 3 partitions of vantage_input topic. See in docker-compose.yml)
  
  
- 
- 
+
   ________________________
 
 
