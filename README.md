@@ -55,6 +55,10 @@
        outputtopic2
        outputtopic3
        twitters
+       
+  To get more details about topic configuration, run : 
+  
+      $KAFKA_HOME/bin/kafka-topics.sh --describe --topic outputtopic1 --zookeeper 172.18.0.2:2181
    
  Looks like we're ready to go...
  
